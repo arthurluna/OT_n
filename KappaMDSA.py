@@ -30,6 +30,8 @@ def fac(z):
 
 #ordem da quadratura de GaussKronrod
 GKO=30
+scheme = quadpy.line_segment.gauss_kronrod(30)
+
 
 #radial position of the microsphere center
 #o objetivo é fazer disso uma variavel que possamos pedir o valor no começo do prog. 
@@ -139,7 +141,7 @@ def integrand(s):
 
 
 #A_tup=quadrature(e,0.,sin(theta_0))
-A_tup=quadpy.line_segment.integrate(integrand, [0., np.sin(theta_0)],quadpy.line_segment.GaussKronrod(15)) 
+A_tup=scheme.integrate(integrand, [0., np.sin(theta_0)]) 
 #print(A_tup) #works -> tupla contem o resultado da integral em [0] e o erro em [1] 
 
 A=A_tup*16*(gammaV**2)
@@ -151,7 +153,7 @@ q=lambda r: K_0*r #size parameter in vacuum
 
 q_1=lambda r: K_1*r #size parameter in water
 
-def q_2(r,m_2)
+def q_2(r,m_2):
     return K_2(m_2)*r #size parameter inside miscrosphere
 
 q_3=lambda r: K_3*r #size parameter in glass
@@ -307,7 +309,7 @@ def G1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dMore(t,m,j)*T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def G2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):#works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))   
@@ -315,7 +317,7 @@ def G2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):#works
     c=lambda t: dLess(t,m,j)*T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def GC1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo hone, tambem Glinha #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.cos(THETA1(t)) 
@@ -323,7 +325,7 @@ def GC1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo hone, 
     c=lambda t: dMore(t,m,j)*T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def GC2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo htwo #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.cos(THETA1(t)) 
@@ -331,7 +333,7 @@ def GC2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo htwo #
     c=lambda t: dLess(t,m,j)*T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 #print(GC(4.1, 0, 0, 0.3, 5, 3.2, 12)) #works
 
 def Gplus1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -340,7 +342,7 @@ def Gplus1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dMore(t,m+1,j)*T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gplus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t)) 
@@ -348,7 +350,7 @@ def Gplus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dLess(t,m+1,j)*T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gminus1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t)) 
@@ -356,7 +358,7 @@ def Gminus1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dMore(t,m-1,j)*T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gminus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t)) 
@@ -364,7 +366,7 @@ def Gminus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dLess(t,m-1,j)*T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 ############### Derivadas dos Coeficientes de Multipolo ###############
 
@@ -374,7 +376,7 @@ def Gssd1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dMore(t,m,j)*T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gssd2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t))**2    #works
@@ -382,7 +384,7 @@ def Gssd2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dLess(t,m,j)*T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gssq1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t))**2    #works
@@ -390,7 +392,7 @@ def Gssq1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dMore(t,m,j)*T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gssq2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t))**2    #works
@@ -398,7 +400,7 @@ def Gssq2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dLess(t,m,j)*T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gsst1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t))**2    #works
@@ -406,7 +408,7 @@ def Gsst1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dMore(t,m,j)*T(t)*Funcao1(rho,t,phiV,m-2,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def Gsst2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     a=lambda t: np.sin(t)*np.sqrt(np.cos(t))*np.sin(THETA1(t))**2    #works
@@ -414,7 +416,7 @@ def Gsst2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     c=lambda t: dLess(t,m,j)*T(t)*Funcao2(rho,t,phiV,m+2,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
     #return quadrature(e,0.,theta_0,maxiter=100)[0]
-    return quadpy.line_segment.integrate(e,[0.,theta_0],quadpy.line_segment.GaussKronrod(GKO))
+    return scheme.integrate(e,[0.,theta_0])
 
 def fator1(Psi):
     return (np.cos(pi*Psi/180.)-np.sin(pi*Psi/180.))*np.exp(-1j*pi*Psi/180.)
