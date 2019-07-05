@@ -45,7 +45,7 @@ w_0=5.82
 lamb_0=1.064 
 
 #numerical aperture of objective 
-NA=1.4 #agua->1.2
+NA=1.2 #agua->1.2
 
 #radius of objective in mm
 Rp=3.6#3.15
@@ -69,7 +69,7 @@ n_2=1.576 #poliestireno
 k_2=0.0011
 
 #refractive index of glass
-n_3=1.51 #igual da silica
+n_3=1.332#(1.51 #igual da silica) #1.332 é igual a agua -> desaparece com a aberração esferica.
 
 #distancia da esfera da interface de vidro, em unidade de raio
 L= 5
