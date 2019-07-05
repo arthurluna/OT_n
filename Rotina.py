@@ -33,7 +33,7 @@ class QZ:
             A.append(f_Qz(self.psi,self.pontos[i][0],self.pontos[i][1],self.pontos[i][2],self.pontos[i][3]))
         return np.array(A)
 
-    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=-1.,zf=4.,pz=20):
+    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=-1.,zf=3.,pz=10):
         self.rho=rho
         self.r=r
         self.L=L
@@ -54,7 +54,7 @@ class QZ:
         for i in range(len(self.pontos)-1):
             if self.Q[i]>0. and self.Q[i+1]<0. :
                 self.trap=1
-                return np.array([self.span[i:i+2],np.array([Q[i],Q[i+1]])])
+                return np.array([self.span[i:i+2],np.array([self.Q[i],self.Q[i+1]])])
         return
 
     def __call__(self,m_2): #calcula a posição de equilibrio a partir da dupla de pontos
@@ -83,14 +83,15 @@ if __name__== '__main__':
 
     ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat)
     
-    span_n=np.linspace(0.2,2.,10)
-    span_k=np.linspace(0,.0015,16)
+    span_n=np.linspace(1.,1.8,15)
+    span_k=np.linspace(0.01516666,.0175,16)
     print(span_n)
     print(span_k)
     print("   ")
 
     DATA=[]
-    '''
+
+
     for i in range(len(span_n)):
         print(i)
         m_2=span_k*1j+span_n[i]
@@ -107,3 +108,4 @@ if __name__== '__main__':
     ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x z $\n raio = 0.5 ; n_esf = 1.576 + i*0.0011')
     ax.legend()
     plt.show()
+    '''
