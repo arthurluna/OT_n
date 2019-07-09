@@ -141,7 +141,7 @@ def integrand(s):
 
 
 #A_tup=quadrature(e,0.,sin(theta_0))
-A_tup=quadrature(integrand, [0., np.sin(theta_0)])[0] 
+A_tup=quadrature(integrand, 0., np.sin(theta_0))[0] 
 #print(A_tup) #works -> tupla contem o resultado da integral em [0] e o erro em [1] 
 
 A=A_tup*16*(gammaV**2)
