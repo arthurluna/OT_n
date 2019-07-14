@@ -110,7 +110,9 @@ if __name__== '__main__':
     ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat)
     
     #span_n=np.linspace(1.,1.8,15)
-    span_k=np.linspace(0.0,0.001,51)
+    span_k=list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
+    sorted(span_k)
+    span_k=np.array(span_k)
 
     print(span_k)
 
@@ -124,7 +126,9 @@ if __name__== '__main__':
     for l in range(len(pin)):
         DATA.append([span_k[l],pin[l]])
 
-    print(DATA)
+    dat1=np.transpose(DATA)
+    plt.plot(dat1[0],dat1[1],'bo')
+    plt.show()
     '''
     m_2=1.576+.001*1j
     ot_z(m_2)
