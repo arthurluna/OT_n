@@ -43,25 +43,51 @@ class QZ:
         self.paramesferico=paramesferico
         self.psi=0.
         self.span=np.linspace(zi,zf,pz)
-        self.trap=1
         assert zf>zi
         if not sqrt(zi**2.)<=L-1.:
             print('Microsphere is out of the bounds of the sample chamber.')
 
-    def dupla(self): #dupla de pontos ao redor do ponto de equilibrio, do qual se obtem uma reta
+    def dupla(self): #dupla de pontos que definem o potencial otico
         self.Q=self.lista2()
-        self.trap=0
+        eq_e=0
+        eq_i=0
+        a=[0,0]
+        if self.Q[-1]<0:
+            self.pontos=self.pontos+self.lista1(np.linspace(3.2,4.,5))
+            self.span=list(self.span)+list(np.linspace(3.,4.,6))
+            self.Q=self.lista2()
+            print("Equilibrium position beyond 3 radii...")
+            print("   ")
+
+        if self.Q[-1]<0:
+            self.pontos=self.pontos+[0]
+            self.span=self.span+[self.span[-1]+.2]
+            self.Q=self.lista2()
+            print("No equilibrium position. Last Qz/ref index")
+            print(Q[-2])
+            print(self.m2)
+            print("   ")
+        
+
         for i in range(len(self.pontos)-1):
             if self.Q[i]>0. and self.Q[i+1]<0. :
-                self.trap=1
-                return np.array([self.span[i:i+2],np.array([self.Q[i],self.Q[i+1]])])
-        return
+                #print(self.Q[i],self.Q[i+1])
+                a=stats.linregress([self.span[i],self.span[i+1]],[self.Q[i],self.Q[i+1]])
+                eq_e=[-a[1]/a[0],i+1]
+            if self.Q[i]<0. and self.Q[i+1]>=0. :
+                a=stats.linregress([self.span[i],self.span[i+1]],[self.Q[i],self.Q[i+1]])
+                eq_i=[-a[1]/a[0],i]
+        
+        barreira=( self.span[eq_e[1]] - eq_e[0] )*self.Q[eq_e[1]]/2 + ( eq_i[0] - self.span[eq_i[1]] )*self.Q[eq_i[1]]/2 + np.trapz(self.Q[eq_e[1]+1:eq_i[1]],x=self.span[eq_e[1]+1:eq_i[1]])
+
+        return -barreira
+
 
     def __call__(self,m_2): #calcula a posição de equilibrio a partir da dupla de pontos
         self.m_2=m_2
-        self.pontos=np.array(self.lista1(self.span))
-        self.dupla()
-        return self.trap
+        self.pontos=self.lista1(self.span)
+        return self.dupla()
+        
         '''if self.trap==1:
                                     b=stats.linregress(a[0],a[1])
                                     return -b[1]/b[0]
@@ -83,21 +109,20 @@ if __name__== '__main__':
 
     ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat)
     
-    span_n=np.linspace(1.,1.8,15)
-    span_k=np.linspace(0.01516666,.0175,16)
-    print(span_n)
+    #span_n=np.linspace(1.,1.8,15)
+    span_k=np.linspace(0.0,0.001,51)
+
     print(span_k)
-    print("   ")
 
     DATA=[]
+    
+    rn=1.576
 
 
-    for i in range(len(span_n)):
-        print(i)
-        m_2=span_k*1j+span_n[i]
-        pin=list(map(ot_z,m_2))
-        for l in range(len(pin)):
-            DATA.append([span_n[i],span_k[l],pin[l]])
+    m_2=span_k*1j+rn
+    pin=list(map(ot_z,m_2))
+    for l in range(len(pin)):
+        DATA.append([span_k[l],pin[l]])
 
     print(DATA)
     '''
