@@ -105,7 +105,7 @@ if __name__== '__main__':
     paramesferico=0.
     paramastigmat=0.
 
-    L=6.34 + 3*k.N_a/raio
+    L=6.34 #+ 3*k.N_a/raio
 
     ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat)
     
