@@ -86,8 +86,8 @@ class QZ:
     def __call__(self,m_2): #calcula a posição de equilibrio a partir da dupla de pontos
         self.m_2=m_2
         self.pontos=self.lista1(self.span)
-        print('len span:')
-        print(len(self.span))
+        #print('len span:')
+        #print(len(self.span))
         return self.dupla()
 
 
@@ -127,10 +127,23 @@ if __name__== '__main__':
     #m_2=span_k*1j+rn
     #pin=list(map(ot_z,m_2))
 
+    def v(z):
+        return np.trapz(y[:z+1],x=x[:z+1])
+    v1=[]
+    for i in range(len(x)):
+        v1.append(-v(i))
+    
+    print(v1)
+    print(len(v1))
+
     fig,ax=plt.subplots()
-    ax.plot(x,y)
+    ax.plot(x,v1,label='Potencial')
+    #ax.plot(x,y,label='Fator de eficiência')
     ax.grid(True)
+    #ax.legend()
     plt.show()
+
+
     '''
     m_2=1.576+.001*1j
     ot_z(m_2)

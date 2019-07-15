@@ -33,7 +33,7 @@ class QZ:
             A.append(f_Qz(self.psi,self.pontos[i][0],self.pontos[i][1],self.pontos[i][2],self.pontos[i][3]))
         return np.array(A)
 
-    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=-1.,zf=3.,pz=10):
+    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=-0.3,zf=7.7,pz=81):
         self.rho=rho
         self.r=r
         self.L=L
@@ -47,23 +47,23 @@ class QZ:
         if not sqrt(zi**2.)<=L-1.:
             print('Microsphere is out of the bounds of the sample chamber.')
 
-    def dupla(self): #dupla de pontos que definem o potencial otico
+    def dupla(self): 
         self.Q=self.lista2()
         eq_e=0
         eq_i=0
         a=[0,0]
         if self.Q[-1]<0:
-            self.pontos=self.pontos+self.lista1(np.linspace(3.2,4.,5))
-            self.span=list(self.span)+list(np.linspace(3.2,4.,5))
+            self.pontos=self.pontos+self.lista1(np.linspace(7.9,8.9,6))
+            self.span=list(self.span)+list(np.linspace(7.9,8.9,6))
             self.Q=self.lista2()
-            print("Equilibrium position beyond 3 radii...")
+            print("Unstable equilibrium position beyond 10 radii...")
             print("   ")
 
         if self.Q[-1]<0:
             self.pontos=self.pontos+[0]
             self.span=self.span+[self.span[-1]+.2]
             self.Q=self.lista2()
-            print("No equilibrium position. Last Qz/ref index")
+            print("No unstable equilibrium position. Last Qz/ref index")
             print(Q[-2])
             print(self.m2)
             print("   ")
@@ -78,7 +78,7 @@ class QZ:
                 a=stats.linregress([self.span[i],self.span[i+1]],[self.Q[i],self.Q[i+1]])
                 eq_i=[-a[1]/a[0],i]
         
-        barreira=( self.span[eq_e[1]] - eq_e[0] )*self.Q[eq_e[1]]/2 + ( eq_i[0] - self.span[eq_i[1]] )*self.Q[eq_i[1]]/2 + np.trapz(self.Q[eq_e[1]+1:eq_i[1]],x=self.span[eq_e[1]+1:eq_i[1]])
+        barreira=( self.span[eq_e[1]] - eq_e[0] )*self.Q[eq_e[1]]/2. + ( eq_i[0] - self.span[eq_i[1]] )*self.Q[eq_i[1]]/2. + np.trapz(self.Q[eq_e[1]+1:eq_i[1]],x=self.span[eq_e[1]+1:eq_i[1]])
 
         return -barreira
 
@@ -110,9 +110,9 @@ if __name__== '__main__':
     ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat)
     
     #span_n=np.linspace(1.,1.8,15)
-    span_k=list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
-    sorted(span_k)
-    span_k=np.array(span_k)
+    span_k=np.linspace(0.,.0012,40)#list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
+    #sorted(span_k)
+    #span_k=np.array(span_k)
 
     print(span_k)
 
@@ -127,7 +127,7 @@ if __name__== '__main__':
         DATA.append([span_k[l],pin[l]])
 
     dat1=np.transpose(DATA)
-    plt.plot(dat1[0],dat1[1],'bo')
+    plt.plot(dat1[0],dat1[1])
     plt.show()
     '''
     m_2=1.576+.001*1j
