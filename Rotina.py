@@ -54,7 +54,7 @@ class QZ:
         a=[0,0]
         if self.Q[-1]<0:
             self.pontos=self.pontos+self.lista1(np.linspace(3.2,4.,5))
-            self.span=list(self.span)+list(np.linspace(3.,4.,6))
+            self.span=list(self.span)+list(np.linspace(3.2,4.,5))
             self.Q=self.lista2()
             print("Equilibrium position beyond 3 radii...")
             print("   ")

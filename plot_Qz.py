@@ -121,8 +121,8 @@ if __name__== '__main__':
     
     y=ot_z.Q
     x=ot_z.span
-    print(len(x))
-    print(len(y))
+    print(x)
+    print(y)
 
     #m_2=span_k*1j+rn
     #pin=list(map(ot_z,m_2))
