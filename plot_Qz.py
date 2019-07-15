@@ -89,12 +89,7 @@ class QZ:
         print('len span:')
         print(len(self.span))
         return self.dupla()
-        
-        '''if self.trap==1:
-                                    b=stats.linregress(a[0],a[1])
-                                    return -b[1]/b[0]
-                                if self.trap==0:
-                                    return '''
+
 
 
 
