@@ -33,7 +33,7 @@ class QZ:
             A.append(f_Qz(self.psi,self.pontos[i][0],self.pontos[i][1],self.pontos[i][2],self.pontos[i][3]))
         return np.array(A)
 
-    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=-0.3,zf=7.7,pz=81):
+    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=.15,zf=1.75,pz=21):
         self.rho=rho
         self.r=r
         self.L=L
@@ -53,8 +53,8 @@ class QZ:
         eq_i=0
         a=[0,0]
         if self.Q[-1]<0:
-            self.pontos=self.pontos+self.lista1(np.linspace(7.9,8.9,6))
-            self.span=list(self.span)+list(np.linspace(7.9,8.9,6))
+            self.pontos=self.pontos+self.lista1(np.linspace(1.83,2.15,5))
+            self.span=list(self.span)+list(np.linspace(1.83,2.15,5))
             self.Q=self.lista2()
             print("Unstable equilibrium position beyond 10 radii...")
             print("   ")
@@ -86,6 +86,7 @@ class QZ:
     def __call__(self,m_2): #calcula a posição de equilibrio a partir da dupla de pontos
         self.m_2=m_2
         self.pontos=self.lista1(self.span)
+        #self.Q=self.lista2()
         return self.dupla()
         
         '''if self.trap==1:
@@ -130,11 +131,12 @@ if __name__== '__main__':
     plt.plot(dat1[0],dat1[1])
     plt.show()
     '''
-    m_2=1.576+.001*1j
+    m_2=1.576+.000*1j
     ot_z(m_2)
     fig,ax=plt.subplots()
     ax.plot(ot_z.span,ot_z.Q,'ro',label='experimental')
     ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x z $\n raio = 0.5 ; n_esf = 1.576 + i*0.0011')
+    ax.grid(True)
     ax.legend()
     plt.show()
     

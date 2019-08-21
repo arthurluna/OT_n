@@ -311,7 +311,7 @@ def G1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dMore(t,m,j))  #works
     c=lambda t: T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def G2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):#works
@@ -319,7 +319,7 @@ def G2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):#works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dLess(t,m,j))  #works
     c=lambda t: T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def GC1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo hone, tambem Glinha #works
@@ -327,7 +327,7 @@ def GC1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo hone, 
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dMore(t,m,j)) 
     c=lambda t: T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def GC2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo htwo #works
@@ -335,7 +335,7 @@ def GC2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico):  #antigo htwo #
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) +  dLess(t,m,j)) 
     c=lambda t: T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 #print(GC(4.1, 0, 0, 0.3, 5, 3.2, 12)) #works
@@ -345,7 +345,7 @@ def Gplus1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dMore(t,m+1,j)) 
     c=lambda t: T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gplus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -353,7 +353,7 @@ def Gplus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dLess(t,m+1,j)) 
     c=lambda t: T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gminus1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -361,7 +361,7 @@ def Gminus1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dMore(t,m-1,j)) 
     c=lambda t: T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gminus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -369,7 +369,7 @@ def Gminus2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dLess(t,m-1,j)) 
     c=lambda t: T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 ############### Derivadas dos Coeficientes de Multipolo ###############
@@ -379,7 +379,7 @@ def Gssd1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dMore(t,m,j))  #works
     c=lambda t: T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gssd2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -387,7 +387,7 @@ def Gssd2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dLess(t,m,j))  #works
     c=lambda t: T(t)*Funcao1(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gssq1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -395,7 +395,7 @@ def Gssq1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dMore(t,m,j))  #works
     c=lambda t: T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gssq2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -403,7 +403,7 @@ def Gssq2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dLess(t,m,j))  #works
     c=lambda t: T(t)*Funcao2(rho,t,phiV,m,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gsst1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -411,7 +411,7 @@ def Gsst1(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dMore(t,m,j))  #works
     c=lambda t: T(t)*Funcao1(rho,t,phiV,m-2,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def Gsst2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
@@ -419,7 +419,7 @@ def Gsst2(j,z,rho,phiV,m,r,L,paramastigmat,phizero,paramesferico): #works
     b=lambda t: np.exp(-(gammaV*np.sin(t))**2 + 1j*psif(z,t,r,L,paramesferico) + dLess(t,m,j))  #works
     c=lambda t: T(t)*Funcao2(rho,t,phiV,m+2,r,paramastigmat,phizero)
     e=lambda t: a(t)*b(t)*c(t)
-    return quadrature(e,0.,theta_0,maxiter=100)[0]
+    return quadrature(e,0.,theta_0,maxiter=200)[0]
     #return scheme.integrate(e,[0.,theta_0])
 
 def fator1(Psi):
