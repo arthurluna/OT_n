@@ -232,21 +232,21 @@ def THETA1(theta):
 
 #Para esferas grandes!
 def dMore(t,m,j):       # t->theta , m->M
-        sub = sqrt((m-1)*(m-1))  #works
-        som = sqrt((m+1)*(m+1))  #works
-        a = log(koppa(m)+0j)-lnfac(sub)    #works
+        sub = np.sqrt((m-1)*(m-1))  #works
+        som = np.sqrt((m+1)*(m+1))  #works
+        a = np.log(koppa(m)+0j)-lnfac(sub)    #works
         b = lnfac( j - 0.5*(sub + som) + sub + som )  #works
         c = lnfac( j - 0.5*(sub + som) + sub )  #works
         d = lnfac( j - 0.5*(sub + som) )  #works
         f = lnfac( j - 0.5*(sub + som) + som )  #works
-        g = log(sin(THETA1(t)/2.)+0j)*(sub)+log(cos(THETA1(t)/2.)+0j)*(som)  #works
+        g = np.log(np.sin(THETA1(t)/2.)+0j)*(sub)+np.log(np.cos(THETA1(t)/2.)+0j)*(som)  #works
         #o problema aqui e a funcao theta1, que ainda nao foi definida (no mathematica ela e definida depois)
         #nao houve erro a principio porq ja temos uma variavel com esse nome.
         ha = -( j - 0.5*(sub+som) ) #works
         hb = j - 0.5*( sub+som ) + sub + som + 1.  #works
         hc = sub + 1                #works
-        hz = sin(THETA1(t)/2.)**2   #works
-        h = log(hyp2f1(ha, hb, hc, hz)+0j)  #works
+        hz = np.sin(THETA1(t)/2.)**2   #works
+        h = np.log(hyp2f1(ha, hb, hc, hz)+0j)  #works
         return a + (b+c-d-f)*(0.5) + g + h  #works
 #print(dMore(0.4,1.3,0.7)) 
 
