@@ -108,37 +108,30 @@ if __name__== '__main__':
 
     L=6.34 #+ 3*k.N_a/raio
 
-    ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat)
+    ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat,zi=.8,zf=1.34,pz=20)
     
     #span_n=np.linspace(1.,1.8,15)
-    span_k=np.linspace(0.,.0012,4)#list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
+    #span_k=np.linspace(0.,.0012,4)#list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
     #sorted(span_k)
     #span_k=np.array(span_k)
 
-    print(span_k)
+    #print(span_k)
 
-    DATA=[]
-    
     rn=1.576
     print("number of multipoles:")
     print(k.LastTerm(raio,rn))
 
-    '''
-    m_2=span_k*1j+rn
-    pin=list(map(ot_z,m_2))
-    for l in range(len(pin)):
-        DATA.append([span_k[l],pin[l]])
-
-    dat1=np.transpose(DATA)
-    plt.plot(dat1[0],dat1[1])
-    plt.show()
-    '''
-    m_2=1.576+.000*1j
-    ot_z(m_2)
+    m_2=1.576+.0005*1j
+    pin=ot_z(m_2)
     fig,ax=plt.subplots()
     ax.plot(ot_z.span,ot_z.Q,'ro',label='numerico')
-    ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x  z $\n raio = 7.9 ; n_esf = 1.576 + i*0.000?')
+    ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x Z $\n raio = '+ str(raio) +'; n_esf = '+ str(m_2))
     ax.grid(True)
     ax.legend()
     plt.show()
+
+    print("valor de Delta para n="+str()+":")
+    print(pin)
+
+
     
