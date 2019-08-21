@@ -98,7 +98,7 @@ class QZ:
 
 if __name__== '__main__':
 
-    raio=0.5
+    raio=7.0
     rho=0.
     phiV=0.
     phizero=0.
@@ -110,7 +110,7 @@ if __name__== '__main__':
     ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat)
     
     #span_n=np.linspace(1.,1.8,15)
-    span_k=np.linspace(0.,.0012,40)#list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
+    span_k=np.linspace(0.,.0012,4)#list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
     #sorted(span_k)
     #span_k=np.array(span_k)
 
@@ -120,7 +120,7 @@ if __name__== '__main__':
     
     rn=1.576
 
-
+    '''
     m_2=span_k*1j+rn
     pin=list(map(ot_z,m_2))
     for l in range(len(pin)):
@@ -137,4 +137,4 @@ if __name__== '__main__':
     ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x z $\n raio = 0.5 ; n_esf = 1.576 + i*0.0011')
     ax.legend()
     plt.show()
-    '''
+    
