@@ -33,7 +33,7 @@ class QZ:
             A.append(f_Qz(self.psi,self.pontos[i][0],self.pontos[i][1],self.pontos[i][2],self.pontos[i][3]))
         return np.array(A)
 
-    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=.15,zf=1.75,pz=21):
+    def __init__(self,rho,phiV,r,L,phizero,paramesferico,paramastigmat,zi=.05,zf=1.75,pz=11):
         self.rho=rho
         self.r=r
         self.L=L
@@ -99,7 +99,7 @@ class QZ:
 
 if __name__== '__main__':
 
-    raio=7.0
+    raio=7.9
     rho=0.
     phiV=0.
     phizero=0.
@@ -120,6 +120,8 @@ if __name__== '__main__':
     DATA=[]
     
     rn=1.576
+    print("number of multipoles:")
+    print(k.LastTerm(raio,rn))
 
     '''
     m_2=span_k*1j+rn
@@ -134,8 +136,8 @@ if __name__== '__main__':
     m_2=1.576+.000*1j
     ot_z(m_2)
     fig,ax=plt.subplots()
-    ax.plot(ot_z.span,ot_z.Q,'ro',label='experimental')
-    ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x z $\n raio = 0.5 ; n_esf = 1.576 + i*0.0011')
+    ax.plot(ot_z.span,ot_z.Q,'ro',label='numerico')
+    ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x  z $\n raio = 7.9 ; n_esf = 1.576 + i*0.000?')
     ax.grid(True)
     ax.legend()
     plt.show()
