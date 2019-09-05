@@ -60,16 +60,16 @@ Sdens=1.04*1e3
 Mdens=0.997*1e3
 
 #refractive index of medium around microsphere
-n_1=1.332 #agua
+n_1=1.324 #agua
 
 #real part of refractive index of the microsphere 
-n_2=1.576 #poliestireno
+n_2=1.4496 #poliestireno
 
 #imaginary part of refractive index of microsphere, for absorbing materials
-k_2=0.0011
+k_2=0.00
 
 #refractive index of glass
-n_3=1.332#(1.51 #igual da silica) #1.332 é igual a agua -> desaparece com a aberração esferica.
+n_3=1.324#(1.51 #igual da silica) #1.332 é igual a agua -> desaparece com a aberração esferica.
 
 #distancia da esfera da interface de vidro, em unidade de raio
 L= 5
@@ -120,12 +120,12 @@ else:
     theta_0 = np.arcsin(NA/n_3)
 #print(theta_0)
 #print(sin(theta_0))
-
+theta_0=np.radians(65)
 #half-aperture angle of beam in glass in the absence of glass-water interface
 theta_1 = np.arcsin(NA/n_3)
 
 #cuidado aqui, temos a funcao gamma da bib. scipy. nao renomear!
-gammaV=(n_3*Rp)/(w_0*NA)
+gammaV=1.88 #(n_3*Rp)/(w_0*NA)
 #print(gamma)
 #print(N_a)
 
@@ -144,7 +144,7 @@ def integrand(s):
 A_tup=quadrature(integrand, 0., np.sin(theta_0))[0] 
 #print(A_tup) #works -> tupla contem o resultado da integral em [0] e o erro em [1] 
 
-A=A_tup*16*(gammaV**2)
+A=1.#A_tup*16*(gammaV**2)
 #print(A) #works
 
 ######################## PARAMETROS DE TAMANHO ##############################################
@@ -808,3 +808,14 @@ def f_Qz(Psi_,d1,d2,c1,c2):
 
 
 #print(Krho(.2,.01,3.,5.,0.,1.,0.,0.1,22.))
+if __name__ == '__main__':
+
+
+    raio=2.47
+    paramastigmat=0.
+    phizero=0.
+    paramesferico=0.
+    Psi=45
+    m_2=n_2
+    calc_kappa=Krho(0,0,raio,0,0,paramastigmat,phizero,paramesferico,Psi,m_2)
+    print(calc_kappa)

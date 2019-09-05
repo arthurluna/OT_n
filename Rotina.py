@@ -52,35 +52,16 @@ class QZ:
         eq_e=0
         eq_i=0
         a=[0,0]
-        if self.Q[-1]<0:
-            self.pontos=self.pontos+self.lista1(np.linspace(1.83,2.15,5))
-            self.span=list(self.span)+list(np.linspace(1.83,2.15,5))
-            self.Q=self.lista2()
-            print("Unstable equilibrium position beyond 10 radii...")
-            print("   ")
-
-        if self.Q[-1]<0:
-            self.pontos=self.pontos+[0]
-            self.span=self.span+[self.span[-1]+.2]
-            self.Q=self.lista2()
-            print("No unstable equilibrium position. Last Qz/ref index")
-            print(Q[-2])
-            print(self.m2)
-            print("   ")
-        
 
         for i in range(len(self.pontos)-1):
             if self.Q[i]>0. and self.Q[i+1]<0. :
                 #print(self.Q[i],self.Q[i+1])
                 a=stats.linregress([self.span[i],self.span[i+1]],[self.Q[i],self.Q[i+1]])
-                eq_e=[-a[1]/a[0],i+1]
-            if self.Q[i]<0. and self.Q[i+1]>=0. :
-                a=stats.linregress([self.span[i],self.span[i+1]],[self.Q[i],self.Q[i+1]])
-                eq_i=[-a[1]/a[0],i]
+                eq_e=-a[1]/a[0]
         
-        barreira=( self.span[eq_e[1]] - eq_e[0] )*self.Q[eq_e[1]]/2. + ( eq_i[0] - self.span[eq_i[1]] )*self.Q[eq_i[1]]/2. + np.trapz(self.Q[eq_e[1]+1:eq_i[1]],x=self.span[eq_e[1]+1:eq_i[1]])
+        #barreira=( self.span[eq_e[1]] - eq_e[0] )*self.Q[eq_e[1]]/2. + ( eq_i[0] - self.span[eq_i[1]] )*self.Q[eq_i[1]]/2. + np.trapz(self.Q[eq_e[1]+1:eq_i[1]],x=self.span[eq_e[1]+1:eq_i[1]])
 
-        return -barreira
+        return eq_e
 
 
     def __call__(self,m_2): #calcula a posição de equilibrio a partir da dupla de pontos
@@ -99,16 +80,17 @@ class QZ:
 
 if __name__== '__main__':
 
-    raio=7.9
+    raio=2.47
     rho=0.
     phiV=0.
     phizero=0.
     paramesferico=0.
     paramastigmat=0.
+    Psi=45
 
     L=6.34 #+ 3*k.N_a/raio
 
-    ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat,zi=.8,zf=1.34,pz=20)
+    ot_z=QZ(rho,phiV,raio,L,phizero,paramesferico,paramastigmat,zi=.38,zf=.47,pz=28)
     
     #span_n=np.linspace(1.,1.8,15)
     #span_k=np.linspace(0.,.0012,4)#list(np.linspace(0.00105,0.00121,5))+list(np.linspace(0.00155,0.0017,5))+list(np.linspace(.002,.004,10))+list(np.linspace(.002,.004,10))
@@ -117,21 +99,25 @@ if __name__== '__main__':
 
     #print(span_k)
 
-    rn=1.576
-    print("number of multipoles:")
-    print(k.LastTerm(raio,rn))
-
-    m_2=1.576+.0005*1j
+    m_2=1.4496
     pin=ot_z(m_2)
-    fig,ax=plt.subplots()
-    ax.plot(ot_z.span,ot_z.Q,'ro',label='numerico')
-    ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x Z $\n raio = '+ str(raio) +'; n_esf = '+ str(m_2))
-    ax.grid(True)
-    ax.legend()
-    plt.show()
-
-    print("valor de Delta para n="+str()+":")
     print(pin)
+
+    list_z=k.Qz(pin,rho,phiV,raio,0,paramastigmat,phizero,paramesferico,m_2)
+    print( f_Qz(Psi,list_z[0],list_z[1],list_z[2],list_z[3]) )
+
+
+    kappa_calc=k.Krho(pin,0,raio,0,0,paramastigmat,phizero,paramesferico,Psi,m_2)
+    print(kappa_calc)
+    #fig,ax=plt.subplots()
+    #ax.plot(ot_z.span,ot_z.Q,'ro',label='numerico')
+    #ax.set(xlabel='z',ylabel='$Q_z$',title='$Q_z x Z $\n raio = '+ str(raio) +'; n_esf = '+ str(m_2))
+    #ax.grid(True)
+    #ax.legend()
+    #plt.show()
+
+    #print("valor de Delta para n="+str()+":")
+    #print(pin)
 
 
     
